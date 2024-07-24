@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Load fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- import css index.css -->
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Estilo del modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+        }
+        .modal input {
+            width: 95%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .modal button {
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="big-div">
+            <a href="#">
+                <div class="curve"></div>
+            </a>
+            <div class="card">
+                <!-- Use a separate span for the text -->
+                <span id="greeting">Feliz dia de la amistad</span>
+                <img src="https://media.tenor.com/gi-hnEGTKdEAAAAi/dancing-duck.gif" alt="animated GIF" loop>
+            </div>
+            <div class="small-div">
+                <div class="small-div-1">
+                    <div class="mid-line"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="nameModal" class="modal">
+        <div class="modal-content">
+            <h2>Introduce tu nombre</h2>
+            <input type="text" id="userName" placeholder="Tu nombre">
+            <button onclick="submitName()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+
+            if (name && name.trim()) {
+                document.getElementById('greeting').textContent += ` ${name}`;
+            } else {
+                document.getElementById('nameModal').style.display = 'block';
+            }
+        });
+
+        function submitName() {
+            const userName = document.getElementById('userName').value.trim();
+            if (userName) {
+                window.location.href = `?name=${encodeURIComponent(userName)}`;
+            } else {
+                alert('Por favor, introduce un nombre válido.');
+            }
+        }
+    </script>
+</body>
+</html>
